@@ -8,24 +8,40 @@
 		window.TinyPromise = factory()
 	}
 })(function () {
-	const pending = Symbol(),
-		fulfilled = Symbol(),
-		rejected = Symbol(),
-		statusWords = Symbol.for('statusWords'),
-		status = Symbol.for('status')
+	const statusWords = Symbol('statusWords'),
+		status = Symbol('status'),
+		value = Symbol('value'),
+		error = Symbol('error'),
+		onFulfilledList = Symbol('onFulfilled'),
+		onRejectedList = Symbol('onRejected'),
+		reject = Symbol('reject'),
+		resolve = Symbol('resolve')
+	//声明私有变量名称
 
 	function TinyPromise(handler) {
 		if (!(this instanceof TinyPromise)) {
 			return new TinyPromise(handler)
 		}
 		this[status] = TinyPromise[statusWords].pending
+		this[value] = undefined
+		this[error] = undefined
+		this[onFulfilledList] = []
+		this[onRejectedList] = []
+	}
+
+	TinyPromise.prototype[resolve] = function(value) {
+
+	}
+
+	TinyPromise.prototype[reject] = function(error) {
+
 	}
 
 	TinyPromise[statusWords] = {
-		pending,
-		fulfilled,
-		rejected
+		pending: Symbol(),
+		fulfilled: Symbol(),
+		rejected: Symbol()
 	}
-	
+
 	return TinyPromise
 })
