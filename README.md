@@ -1,0 +1,1 @@
+按照promise/A+来实现一个小的promise.
